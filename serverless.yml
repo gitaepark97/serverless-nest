@@ -21,13 +21,10 @@ provider:
       - sg-06e8dccfc52108a8f
     subnetIds:
       - subnet-0cb22f7c2e37da141
-  iamRoleStatements:
-    - Effect: 'Allow'
-      Action:
-        - 'ec2:DescribeNetworkInterfaces'
-        - 'ec2:CreateNetworkInterface'
-        - 'ec2:DeleteNetworkInterface'
-      Resource: '*'
+  # iamRoleStatements:
+  #   - Effect: 'Allow'
+  #     Action:
+  #     Resource:
  
 functions:
   api:
