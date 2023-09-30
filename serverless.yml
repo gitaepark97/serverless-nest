@@ -1,0 +1,38 @@
+service: serverless-nest
+ 
+frameworkVersion: '3'
+
+plugins:
+  - serverless-jetpack
+  - serverless-offline
+  - serverless-dotenv-plugin
+  
+provider:
+  name: aws
+  region: ap-northeast-2
+  architecture: arm64
+  runtime: nodejs18.x
+  stage: ${opt:stage, 'dev'}
+  memorySize: 128
+  logRetentionInDays: 1
+  timeout: 15
+  vpc:
+    securityGroupIds:
+      - sg-06e8dccfc52108a8f
+    subnetIds:
+      - subnet-0cb22f7c2e37da141
+  iamRoleStatements:
+    - Effect: 'Allow'
+      Action:
+        - 'ec2:DescribeNetworkInterfaces'
+        - 'ec2:CreateNetworkInterface'
+        - 'ec2:DeleteNetworkInterface'
+      Resource: '*'
+ 
+functions:
+  api:
+    handler: dist/lambda.handler
+    events:
+      - http:
+          method: any
+          path: /{proxy+}
