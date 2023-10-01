@@ -1,15 +1,17 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { validate } from './env.validation';
+import { HealthCheckController } from './health-check/health-check.controller';
+import { TerminusModule } from '@nestjs/terminus';
+import { HttpModule } from '@nestjs/axios';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       validate,
+      envFilePath: `.env.${process.env.NODE_ENV}`,
     }),
     TypeOrmModule.forRootAsync({
       useFactory: async (configService: ConfigService) => {
@@ -25,8 +27,9 @@ import { validate } from './env.validation';
       },
       inject: [ConfigService],
     }),
+    TerminusModule,
+    HttpModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [HealthCheckController],
 })
 export class AppModule {}
