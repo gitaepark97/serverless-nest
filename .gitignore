@@ -39,5 +39,6 @@ lerna-debug.log*
 .serverless
 
 # env
+.env.Tests
 .env.local
 .env.development

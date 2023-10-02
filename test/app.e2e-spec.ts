@@ -1,5 +1,6 @@
+import request from 'supertest';
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { AppModule } from './../src/app.module';
 
 describe('AppController (e2e)', () => {
@@ -11,6 +12,20 @@ describe('AppController (e2e)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.setGlobalPrefix('api');
+    app.useGlobalPipes(new ValidationPipe());
+
     await app.init();
+  });
+
+  afterEach((done) => {
+    app.close();
+    done();
+  });
+
+  describe('health-check (GET)', () => {
+    it('success', () => {
+      return request(app.getHttpServer()).get('/api/health-check').expect(200);
+    });
   });
 });

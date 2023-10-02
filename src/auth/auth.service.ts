@@ -28,12 +28,16 @@ export class AuthService {
   ) {}
 
   async register(dto: RegisterRequestDto) {
-    return this.usersService.createUser(
-      dto.email,
-      dto.password,
-      dto.nickname,
-      dto.gender,
-    );
+    try {
+      return this.usersService.createUser(
+        dto.email,
+        dto.password,
+        dto.nickname,
+        dto.gender,
+      );
+    } catch (err) {
+      throw new InternalServerErrorException();
+    }
   }
 
   async validateUser(email: string, password: string) {
