@@ -21,7 +21,7 @@ export class Users {
   @PrimaryGeneratedColumn({ type: 'int', name: 'user_id' })
   userId: number;
 
-  @Column({ type: 'varchar', name: 'email', unique: true, length: 50 })
+  @Column({ type: 'varchar', name: 'email', length: 50 })
   email: string;
 
   @Column({
@@ -35,7 +35,7 @@ export class Users {
   @Column({ type: 'varchar', name: 'salt', length: 255, select: false })
   salt: string;
 
-  @Column({ type: 'varchar', name: 'nickname', unique: true, length: 50 })
+  @Column({ type: 'varchar', name: 'nickname', length: 50 })
   nickname: string;
 
   @Column({ type: 'enum', name: 'gender', enum: Gender })

@@ -44,6 +44,12 @@ export class Sessions {
   @ManyToOne(() => Users, (users) => users.sessions, {
     onDelete: 'CASCADE',
   })
-  @JoinColumn([{ name: 'user_id', referencedColumnName: 'userId' }])
+  @JoinColumn([
+    {
+      name: 'user_id',
+      referencedColumnName: 'userId',
+      foreignKeyConstraintName: 'fk_user_id',
+    },
+  ])
   user: Users;
 }

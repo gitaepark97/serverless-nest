@@ -20,7 +20,10 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "create:mariadb": "docker run --name mariadb -d -p 3306:3306 -e MARIADB_ROOT_PASSWORD=root_password -e MARIADB_DATABASE=serverless_nest mariadb:11",
     "remove:mariadb": "docker container stop mariadb && docker container rm mariadb",
-    "typeorm:local": "npm run build && NODE_ENV=local npx typeorm -d dist/db/data-source.js"
+    "typeorm:local": "npm run build && NODE_ENV=local npx typeorm -d dist/db/data-source.js",
+    "typeorm:dev": "npm run build && NODE_ENV=development npx typeorm -d dist/db/data-source.js",
+    "db_docs": "dbdocs build db/db.dbml",
+    "db_schema": "dbml2sql --mariadb -o db/schema.sql db/db.dbml"
   },
   "dependencies": {
     "@nestjs/axios": "^3.0.0",

@@ -36,6 +36,38 @@
   npm run create:mariadb
   ```
 
+- Run db migration up:
+  ```bash
+  npm run typeorm:${stage} migration:up
+  ```
+- Run db migration down:
+  ```bash
+   npm run typeorm:${stage} migration:revert
+  ```
+
+### Documentation
+
+- Generate DB documentation:
+
+  ```bash
+  npm run db_docs
+  ```
+
+- Access the DB documentation at [this address](https://dbdocs.io/parkkitae7/serverless_nest).
+
+### How to generate code
+
+- Generate schema SQL file with DBML:
+
+  ```bash
+  npm run db_schema
+  ```
+
+- Generate a new db migration:
+  ```bash
+  npm run migration:generate db/migrations/<migration_name>
+  ```
+
 ## Installation
 
 ```bash
