@@ -10,8 +10,8 @@ import {
 import { Sessions } from './Sessions';
 
 export enum Gender {
-  M,
-  W,
+  M = 'M',
+  W = 'W',
 }
 
 @Index('email', ['email'], { unique: true })
